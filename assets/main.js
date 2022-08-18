@@ -1,16 +1,17 @@
 /*Urls de la apis*/
-const apiYoutube = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCLVz1B001PIbq9LliJenV2w&part=snippet%2Cid&order=date&maxResults=10';
+const apiYoutube = 'https://youtube138.p.rapidapi.com/channel/videos/?id=UCLVz1B001PIbq9LliJenV2w&filter=uploads_latest&hl=en&gl=US';
 const apiInstagram = 'https://pruebaaplicacionesdev.000webhostapp.com/api_instagram.php';
 
 /*Elemento donde vamos a insertar los videos en el dom*/
 const youtube = null || document.getElementById('youtube');
 const instagram = null || document.getElementById('instagram');
 /*Opciones para hacer la peticion a la api*/
+
 const optionsY = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '589963e22fmshf3dc928c0101ed9p1e182ejsne4bfa54016f9', // key unica no se debe compartir con nadie
-		'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+		'X-RapidAPI-Key': '589963e22fmshf3dc928c0101ed9p1e182ejsne4bfa54016f9',
+		'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
 	}
 };
     /*Obtenemos los datos de la api*/
@@ -24,20 +25,20 @@ async function fetchData(urlApi){
 interfaceYoutube(); 
 async function interfaceYoutube(){
     try{
+
         const videos = await fetchData(apiYoutube);
-        
         let view = `
-            ${videos.items.map(video => `
-                <a target="_blank" href="https://www.youtube.com/watch?v=${video.id.videoId}">
+            ${videos.contents.map(video => `
+                <a target="_blank" href="https://www.youtube.com/watch?v=${video.video.videoId}">
                     <div class="group relative">
                         <div class="relative w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
-                            <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.description}" class="w-full">
+                            <img src="${(typeof video.video.thumbnails[3]!== 'undefined')? video.video.thumbnails[3].url : video.video.thumbnails[0].url}" alt="${video.video.title}" class="w-full h-[157px]">
                             <i class="text-xl fa-solid fa-play absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white	 "></i>
                         </div>
                         <div class="mt-4 flex justify-between">
                             <h3 class="text-sm text-gray-700">
                                 <span aria-hidden="true" class="absolute inset-0"></span>
-                                ${video.snippet.title}
+                                ${video.video.title}
                             </h3>
                         </div>
                     </div>
@@ -45,7 +46,7 @@ async function interfaceYoutube(){
             ` ).slice(0,4).join('')}
             `;
             youtube.innerHTML = view;
-        //Limitamos la cantidad de elementos del array 0 a 4 y (los unimos con join como una cadena)
+        //Limitamos la cantidad de elementos del array 0 a 4 y (los unimos el array con join como cadena)
     }catch(error){
         console.log(error);
     }
