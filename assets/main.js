@@ -69,13 +69,13 @@ async function interfaceInstagram(){
         let view = items.map(item=>{
             if(item.media_type=='VIDEO'){ 
                  return `
-                    <div class="group relative">
-                        <div class=""> 
+                    <div class="group">
+                    <div class="">
+
                             <video width="400" controls="true">
                                 <source src="${item.media_url}" type="video/mp4">
                             </video>
-                        </div>
-                    
+                       </div>
                         <div class="mt-4 flex justify-between">
                                 <h3 class="text-sm text-gray-700">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
