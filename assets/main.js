@@ -71,17 +71,16 @@ async function interfaceInstagram(){
                  return `
                     <div class="group relative">
                         <div class=""> 
-                            <video width="400" controls>
+                            <video width="400" controls="true">
                                 <source src="${item.media_url}" type="video/mp4">
                             </video>
                         </div>
-                    
-                        <div class="mt-4 flex justify-between">
-                                <h3 class="text-sm text-gray-700">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                        ${item.caption}
-                                </h3>
-                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                            <h3 class="text-sm text-gray-700">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                    ${item.caption}
+                            </h3>
                     </div>
                             `;
                             
