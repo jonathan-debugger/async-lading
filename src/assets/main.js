@@ -1,6 +1,6 @@
 /*Urls de la apis*/
 const apiYoutube = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCLVz1B001PIbq9LliJenV2w&part=snippet%2Cid&order=date&maxResults=10';
-const apiInstagram = 'https://graph.instagram.com/me/media?fields=id,media_url,media_type,caption&limit=4&access_token=IGQVJVTnpvMG1Cb3ZAuRmFpaDFyd25BQ3hhNnY3SE8tSzhsY1NsZA2hfUEg4R2w1OWdPTVg3TEV3ZATJmVDNYTTdfQjdsVWRDQnFCdVZAraHlzUTJCcG5KTjVhVWs4UUxTQ2pJMDl4RUphd3F3V0ZAVaFQxSQZDZD';
+const apiInstagram = 'https://pruebaaplicacionesdev.000webhostapp.com/api_instagram.php';
 
 /*Elemento donde vamos a insertar los videos en el dom*/
 const youtube = null || document.getElementById('youtube');
@@ -65,7 +65,7 @@ async function interfaceInstagram(){
     try {
         const data = await getDataInstagram(apiInstagram);
         const items = data.data;
-            
+        
         let view = items.map(item=>{
             if(item.media_type=='VIDEO'){ 
                  return `
@@ -75,12 +75,13 @@ async function interfaceInstagram(){
                                 <source src="${item.media_url}" type="video/mp4">
                             </video>
                         </div>
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                            <h3 class="text-sm text-gray-700">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                    ${item.caption}
-                            </h3>
+                    
+                        <div class="mt-4 flex justify-between">
+                                <h3 class="text-sm text-gray-700">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                        ${item.caption}
+                                </h3>
+                        </div>
                     </div>
                             `;
                             
